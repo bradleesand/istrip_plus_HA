@@ -55,7 +55,10 @@ class PayloadGenerator:
     # All three colour channels at zero reads as a hardware power-off: the
     # lamp cuts its own controller and neither BLE nor the IR remote can
     # wake it again. "Off" is therefore a near-dark frame, not a dark one.
-    OFF_RGB = (255, 104, 242)
+    # A single channel at 1 is enough to keep the controller alive and is
+    # visually dark; a full-scale colour at brightness 1 still shows as a
+    # clearly lit pink/white on some strips (e.g. MY-xxxxxx controllers).
+    OFF_RGB = (1, 0, 0)
     OFF_BRIGHTNESS = 1
 
     EFFECT_MODES: dict[str, int] = {  # noqa: RUF012
